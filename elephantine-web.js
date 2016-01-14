@@ -19,6 +19,34 @@ symbols.forEach(function (symbol) {
 
 var old;
 
+function upscale(canvas, ctx) {
+  var devicePixelRatio = window.devicePixelRatio || 1;
+  var backingStoreRatio = ctx.webkitBackingStorePixelRatio ||
+                          ctx.mozBackingStorePixelRatio ||
+                          ctx.msBackingStorePixelRatio ||
+                          ctx.oBackingStorePixelRatio ||
+                          ctx.backingStorePixelRatio || 1;
+
+  var ratio = devicePixelRatio / backingStoreRatio;
+
+  // upscale the canvas if the two ratios don't match
+  if (devicePixelRatio !== backingStoreRatio) {
+    var oldWidth = canvas.width;
+    var oldHeight = canvas.height;
+
+    canvas.width = oldWidth * ratio;
+    canvas.height = oldHeight * ratio;
+
+    canvas.style.width = oldWidth + 'px';
+    canvas.style.height = oldHeight + 'px';
+
+    // now scale the context to counter
+    // the fact that we've manually scaled
+    // our canvas element
+    ctx.scale(ratio, ratio);
+  }
+}
+
 function render(force) {
   var curve = $('#curve').val();
 
@@ -33,7 +61,6 @@ function render(force) {
   console.log('rendering', curve);
 
   var canvas = document.getElementById('canvas');
-
   var ctx = canvasUtilities.getContext(canvas);
 
   var width = $('#canvas').width();
@@ -46,6 +73,7 @@ function render(force) {
 
 function resize() {
   var canvas = document.getElementById('canvas');
+  var ctx = canvasUtilities.getContext(canvas);
 
   canvas.width = $('#canvas').width();
   canvas.height = $('#canvas').height();
@@ -53,6 +81,7 @@ function resize() {
   $('#canvas').attr('width', $('#canvas').width());
   $('#canvas').attr('height', $('#canvas').height());
 
+  upscale(canvas, ctx);
   render(true);
 }
 

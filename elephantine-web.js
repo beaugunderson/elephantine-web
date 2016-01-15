@@ -55,6 +55,7 @@ symbols.forEach(function (symbol) {
 $('#symbols > div').click(function () {
   $('#curve').textrange('insert', $(this).text());
   $('#curve').textrange('setcursor', $('#curve').textrange('get', 'end'));
+  $('#curve').keyup();
 });
 
 var old;
@@ -147,6 +148,6 @@ if (fragment.curve) {
 
 $('#curve').val(curve);
 
-$('#curve').on('keyup', _.debounce(_.ary(render, 0), 500));
+$('#curve').keyup(_.debounce(_.ary(render, 0), 500));
 
 $(document).ready(resize);

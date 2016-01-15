@@ -6,15 +6,55 @@ var elephantine = require('elephantine');
 var URI = require('urijs');
 require('urijs/src/URI.fragmentQuery.js');
 var $ = require('jquery');
+require('jquery-textrange');
 var _ = require('lodash');
 
 debug.enable('elephantine:*');
+
+function asyncDebounce(func) {
+  var delayedFunc = null;
+  var executing = false;
+
+  return function debounced() {
+    var self = this;
+    var args = Array.prototype.slice.call(arguments);
+    var nargs = args.length;
+    var callback = args[nargs - 1];
+
+    function delayed() {
+      executing = true;
+      func.apply(self, args);
+    }
+
+    args[nargs - 1] = function () {
+      callback.apply(self, arguments);
+      executing = false;
+
+      if (delayedFunc) {
+        delayedFunc();
+      }
+
+      delayedFunc = null;
+    };
+
+    if (executing) {
+      delayedFunc = delayed;
+    } else {
+      delayed();
+    }
+  };
+}
 
 var symbols = _.uniq(elephantine.system.emojiSymbols
   .concat(elephantine.system.symbolsByTag.setting));
 
 symbols.forEach(function (symbol) {
-  $('#symbols').append(`<div>${symbol}</div>`);
+  $('#symbols').append(`<div class="no-select">${symbol}</div>`);
+});
+
+$('#symbols > div').click(function () {
+  $('#curve').textrange('insert', $(this).text());
+  $('#curve').textrange('setcursor', $('#curve').textrange('get', 'end'));
 });
 
 var old;
@@ -47,6 +87,8 @@ function upscale(canvas, ctx) {
   }
 }
 
+var debouncedRender = asyncDebounce(elephantine.render);
+
 function render(force) {
   var curve = $('#curve').val();
 
@@ -66,22 +108,27 @@ function render(force) {
   var width = $('#canvas').width();
   var height = $('#canvas').height();
 
-  console.log('width, height', width, height);
-
-  elephantine.render(ctx, curve, width, height, 10000);
+  debouncedRender(ctx, curve, width, height, 100000, true,
+    function (err, globals) {
+      console.log('finished', globals);
+    });
 }
 
 function resize() {
   var canvas = document.getElementById('canvas');
   var ctx = canvasUtilities.getContext(canvas);
 
-  canvas.width = $('#canvas').width();
-  canvas.height = $('#canvas').height();
+  var parentWidth = $('#canvas').parent().innerWidth();
+  var parentHeight = $('#canvas').parent().innerHeight();
 
-  $('#canvas').attr('width', $('#canvas').width());
-  $('#canvas').attr('height', $('#canvas').height());
+  canvas.width = parentWidth;
+  canvas.height = parentHeight;
+
+  $('#canvas').attr('width', parentWidth);
+  $('#canvas').attr('height', parentHeight);
 
   upscale(canvas, ctx);
+
   render(true);
 }
 
@@ -102,4 +149,4 @@ $('#curve').val(curve);
 
 $('#curve').on('keyup', _.debounce(_.ary(render, 0), 500));
 
-resize();
+$(document).ready(resize);

@@ -9,11 +9,31 @@
   </head>
 
   <body>
-    <div id="symbols"></div>
+    <div id="table">
+      <div id="table-row">
+        <div id="left">
+          <div id="left-table">
+            <div id="left-table-row-1">
+              <div id="left-top">
+                <div id="symbols-table">
+                  <div id="symbols"></div>
+                </div>
+              </div>
+            </div>
 
-    <textarea id="curve"></textarea>
+            <div id="left-table-row-2">
+              <div id="left-bottom">
+                <textarea id="curve"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
 
-    <canvas id="canvas" width="800" height="800"></canvas>
+        <div id="right">
+          <canvas id="canvas"></canvas>
+        </div>
+      </div>
+    </div>
 
     <script src="bundle.js"></script>
   </body>

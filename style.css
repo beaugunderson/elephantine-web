@@ -5,11 +5,70 @@
 }
 
 html, body {
+  width: 100%;
   height: 100%;
 }
 
+#table {
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+
+#table-row {
+  display: table-row;
+  height: 100%;
+}
+
+#left {
+  width: 50%;
+  height: 100%;
+  display: table-cell;
+  vertical-align: top;
+  padding: 10px;
+}
+
+#right {
+  width: 50%;
+  height: 100%;
+  display: table-cell;
+  vertical-align: top;
+}
+
+#symbols-table {
+  display: table;
+  border-collapse: separate;
+  border-spacing: 4px;
+}
+
 #symbols {
-  position: fixed;
+  display: table-row;
+}
+
+#left-table {
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+
+#left-table-row-1,
+#left-table-row-2 {
+  display: table-row;
+}
+
+#left-table-row-2 {
+  height: 100%;
+}
+
+#left-top {
+  display: table-cell;
+  vertical-align: top;
+}
+
+#left-bottom {
+  display: table-cell;
+  vertical-align: top;
+  height: 100%;
 }
 
 #symbols > div {
@@ -17,22 +76,22 @@ html, body {
   vertical-align: middle;
   text-align: center;
   font-family: emoji;
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   border: 1px solid #ccc;
   background-color: #eee;
   margin-right: 5px;
 }
 
 textarea {
+  resize: none;
   font-family: emoji;
   font-size: 18pt;
-  width: 25%;
-  height: 100vh;
-  padding: 15px;
-  padding-top: 47px;
-  float: left;
+  width: 100%;
+  height: 100%;
   border: none;
+  padding-left: 4px;
+  padding-top: 10px;
   font-weight: normal;
 }
 
@@ -40,12 +99,13 @@ textarea:focus {
   outline: none;
 }
 
-canvas {
-  float: right;
-  min-height: 100%;
-  max-height: 100%;
-  max-width: 73%;
-  /* border: 1px solid #ccc; */
+.no-select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 @font-face {

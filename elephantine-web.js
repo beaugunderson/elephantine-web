@@ -46,7 +46,8 @@ function asyncDebounce(func) {
 }
 
 var symbols = _.uniq(elephantine.system.emojiSymbols
-  .concat(elephantine.system.symbolsByTag.setting));
+                     .concat(elephantine.system.symbolsByTag.setting)
+                     .concat(['Ƥ()']));
 
 symbols.forEach(function (symbol) {
   $('#symbols').append(`<div class="no-select">${symbol}</div>`);

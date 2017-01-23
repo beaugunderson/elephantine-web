@@ -2,9 +2,11 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: Consolas, 'Deja Vu Sans Mono', monospace;
 }
 
-html, body {
+html,
+body {
   width: 100%;
   height: 100%;
 }
@@ -16,7 +18,6 @@ html, body {
 }
 
 #table-row {
-  display: table-row;
   height: 100%;
 }
 
@@ -45,29 +46,36 @@ html, body {
   display: table-row;
 }
 
+#settings-table {
+  display: table;
+  border-collapse: separate;
+  border-spacing: 4px;
+}
+
+#settings {
+  display: table-row;
+}
+
 #left-table {
   display: table;
   width: 100%;
   height: 100%;
 }
 
-#left-table-row-1,
-#left-table-row-2 {
+.row {
   display: table-row;
 }
 
-#left-table-row-2 {
+#left-bottom-row {
   height: 100%;
 }
 
-#left-top {
+.cell {
   display: table-cell;
   vertical-align: top;
 }
 
 #left-bottom {
-  display: table-cell;
-  vertical-align: top;
   height: 100%;
 }
 
@@ -112,21 +120,23 @@ textarea:focus {
   font-family: emoji;
 
   /* Fonts for text outside emoji blocks */
-  src: local('Droid Sans Mono'),
-       local('Lucida Console'),
-       local('Arial Monospaced'),
-       local(Arial);
+  src:
+    local("Droid Sans Mono"),
+    local("Lucida Console"),
+    local("Arial Monospaced"),
+    local(Arial);
 }
 
 @font-face {
   font-family: emoji;
 
-  src: local('Apple Color Emoji'),
-       local('Android Emoji'),
-       local('Segoe UI'),
-       local(EmojiSymbols),
-       local(Symbola);
+  src:
+    local("Apple Color Emoji"),
+    local("Android Emoji"),
+    local("Segoe UI"),
+    local(EmojiSymbols),
+    local(Symbola);
 
   /* Emoji unicode blocks */
-  unicode-range: U+00A9,U+00AE,U+203C,U+2049,U+2122,U+2139,U+2194-2199,U+21A9-21AA,U+231A-231B,U+23E9-23EC,U+23F0,U+23F3,U+24C2,U+25AA-25AB,U+25B6,U+25C0,U+25FB-25FE,U+2600-2601,U+260E,U+2611,U+2614-2615,U+261D,U+263A,U+2648-2653,U+2660,U+2663,U+2665-2666,U+2668,U+267B,U+267F,U+2693,U+26A0-26A1,U+26AA-26AB,U+26BD-26BE,U+26C4-26C5,U+26CE,U+26D4,U+26EA,U+26F2-26F3,U+26F5,U+26FA,U+26FD,U+2702,U+2705,U+2708-270C,U+270F,U+2712,U+2714,U+2716,U+2728,U+2733-2734,U+2744,U+2747,U+274C,U+274E,U+2753-2755,U+2757,U+2764,U+2795-2797,U+27A1,U+27B0,U+27BF,U+2934-2935,U+2B05-2B07,U+2B1B-2B1C,U+2B50,U+2B55,U+3030,U+303D,U+3297,U+3299,U+1F004,U+1F0CF,U+1F170-1F171,U+1F17E-1F17F,U+1F18E,U+1F191-1F19A,U+1F201-1F202,U+1F21A,U+1F22F,U+1F232-1F23A,U+1F250-1F251,U+1F300-1F31F,U+1F330-1F335,U+1F337-1F37C,U+1F380-1F393,U+1F3A0-1F3C4,U+1F3C6-1F3CA,U+1F3E0-1F3F0,U+1F400-1F43E,U+1F440,U+1F442-1F4F7,U+1F4F9-1F4FC,U+1F500-1F507,U+1F509-1F53D,U+1F550-1F567,U+1F5FB-1F640,U+1F645-1F64F,U+1F680-1F68A,U+1F68C-1F6C5;
+  unicode-range: U+00A9, U+00AE, U+203C, U+2049, U+2122, U+2139, U+2194-2199, U+21A9-21AA, U+231A-231B, U+23E9-23EC, U+23F0, U+23F3, U+24C2, U+25AA-25AB, U+25B6, U+25C0, U+25FB-25FE, U+2600-2601, U+260E, U+2611, U+2614-2615, U+261D, U+263A, U+2648-2653, U+2660, U+2663, U+2665-2666, U+2668, U+267B, U+267F, U+2693, U+26A0-26A1, U+26AA-26AB, U+26BD-26BE, U+26C4-26C5, U+26CE, U+26D4, U+26EA, U+26F2-26F3, U+26F5, U+26FA, U+26FD, U+2702, U+2705, U+2708-270C, U+270F, U+2712, U+2714, U+2716, U+2728, U+2733-2734, U+2744, U+2747, U+274C, U+274E, U+2753-2755, U+2757, U+2764, U+2795-2797, U+27A1, U+27B0, U+27BF, U+2934-2935, U+2B05-2B07, U+2B1B-2B1C, U+2B50, U+2B55, U+3030, U+303D, U+3297, U+3299, U+1F004, U+1F0CF, U+1F170-1F171, U+1F17E-1F17F, U+1F18E, U+1F191-1F19A, U+1F201-1F202, U+1F21A, U+1F22F, U+1F232-1F23A, U+1F250-1F251, U+1F300-1F31F, U+1F330-1F335, U+1F337-1F37C, U+1F380-1F393, U+1F3A0-1F3C4, U+1F3C6-1F3CA, U+1F3E0-1F3F0, U+1F400-1F43E, U+1F440, U+1F442-1F4F7, U+1F4F9-1F4FC, U+1F500-1F507, U+1F509-1F53D, U+1F550-1F567, U+1F5FB-1F640, U+1F645-1F64F, U+1F680-1F68A, U+1F68C-1F6C5;
 }

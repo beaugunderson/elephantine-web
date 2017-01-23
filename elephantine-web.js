@@ -109,7 +109,10 @@ function render(force) {
   var width = $('#canvas').width();
   var height = $('#canvas').height();
 
-  debouncedRender(ctx, curve, width, height, 100000, true,
+  var maxLength = parseInt($('#max-length').val(), 10) || 20000;
+  var renderSeconds = parseInt($('#render-seconds').val(), 10) || 5;
+
+  debouncedRender(ctx, curve, width, height, maxLength, true,
     function (err, globals) {
       console.log('finished', globals);
     });
@@ -149,5 +152,7 @@ if (fragment.curve) {
 $('#curve').val(curve);
 
 $('#curve').keyup(_.debounce(_.ary(render, 0), 500));
+$('#max-length').keyup(_.debounce(function () {render(true);}, 500));
+$('#render-length').keyup(_.debounce(function () {render(true);}, 500));
 
 $(document).ready(resize);

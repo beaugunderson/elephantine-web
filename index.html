@@ -10,19 +10,37 @@
 
   <body>
     <div id="table">
-      <div id="table-row">
+      <div id="table-row" class="row">
         <div id="left">
           <div id="left-table">
-            <div id="left-table-row-1">
-              <div id="left-top">
+            <div class="row">
+              <div class="cell">
                 <div id="symbols-table">
                   <div id="symbols"></div>
                 </div>
               </div>
             </div>
 
-            <div id="left-table-row-2">
-              <div id="left-bottom">
+            <div class="row">
+              <div class="cell">
+                <div id="settings-table">
+                  <div class="cell">
+                    <label>
+                      maximum length:
+
+                      <input type="text" id="max-length" value="20000">
+                    </label>
+                  </div>
+
+                  <!-- <div class="cell"> -->
+                  <!--   tweet this l-system -->
+                  <!-- </div> -->
+                </div>
+              </div>
+            </div>
+
+            <div class="row" id="left-bottom-row">
+               <div id="left-bottom" class="cell">
                 <textarea id="curve"></textarea>
               </div>
             </div>

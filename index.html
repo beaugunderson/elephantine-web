@@ -13,20 +13,20 @@
       <div id="table-row" class="row">
         <div id="left">
           <div id="left-table">
-            <div class="row">
-              <div class="cell">
+            <div class="row gray">
+              <div class="cell" id="symbols-cell">
                 <div id="symbols-table">
                   <div id="symbols"></div>
                 </div>
               </div>
             </div>
 
-            <div class="row">
-              <div class="cell">
+            <div class="row gray">
+              <div class="cell" id="settings-cell">
                 <div id="settings-table">
                   <div class="cell">
                     <label>
-                      maximum length:
+                      Maximum length:
 
                       <input type="text" id="max-length" value="20000">
                     </label>
@@ -39,10 +39,14 @@
               </div>
             </div>
 
-            <div class="row" id="left-bottom-row">
-               <div id="left-bottom" class="cell">
+            <div class="row" id="entry-row">
+              <div id="entry" class="cell">
                 <textarea id="curve"></textarea>
               </div>
+            </div>
+
+            <div class="row gray">
+              <div id="output" class="cell"></div>
             </div>
           </div>
         </div>

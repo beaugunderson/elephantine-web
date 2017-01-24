@@ -91,6 +91,20 @@ function upscale(canvas, ctx) {
 
 var debouncedRender = asyncDebounce(elephantine.render);
 
+function commandToString(command) {
+  if (typeof command !== 'object') {
+    return command;
+  }
+
+  var args = command.args ? command.args.join('') : '';
+
+  return command.command + args;
+}
+
+function toString(curve) {
+  return _.map(curve.expanded, commandToString).join('');
+}
+
 function render(force) {
   var curve = $('#curve').val();
 
@@ -102,7 +116,19 @@ function render(force) {
 
   location.href = URI(location.href).fragment({curve: curve}).toString();
 
+  var maxLength = parseInt($('#max-length').val(), 10) || 20000;
+
   console.log('rendering', curve);
+
+  var growth = '';
+
+  for (var i = 1; i <= 5; i++) {
+    growth += '<div>' + toString(elephantine.expand(curve, maxLength, i)) + '</div>';
+  }
+
+  $('#output').html(growth);
+
+  console.log(growth);
 
   var canvas = document.getElementById('canvas');
   var ctx = canvasUtilities.getContext(canvas);
@@ -110,8 +136,7 @@ function render(force) {
   var width = $('#canvas').width();
   var height = $('#canvas').height();
 
-  var maxLength = parseInt($('#max-length').val(), 10) || 20000;
-  var renderSeconds = parseInt($('#render-seconds').val(), 10) || 5;
+  // var renderSeconds = parseInt($('#render-seconds').val(), 10) || 5;
 
   debouncedRender(ctx, curve, width, height, maxLength, true,
     function (err, globals) {

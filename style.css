@@ -2,7 +2,7 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: Consolas, 'Deja Vu Sans Mono', monospace;
+  font-family: emoji, 'Deja Vu Sans Mono', 'Consolas', monospace;
 }
 
 html,
@@ -26,7 +26,6 @@ body {
   height: 100%;
   display: table-cell;
   vertical-align: top;
-  padding: 10px;
 }
 
 #right {
@@ -42,10 +41,6 @@ body {
   border-spacing: 4px;
 }
 
-#symbols {
-  display: table-row;
-}
-
 #settings-table {
   display: table;
   border-collapse: separate;
@@ -54,6 +49,7 @@ body {
 
 #settings {
   display: table-row;
+  padding: 5px;
 }
 
 #left-table {
@@ -66,24 +62,43 @@ body {
   display: table-row;
 }
 
-#left-bottom-row {
-  height: 100%;
+#entry-row,
+#entry,
+#output-row,
+#output {
+  height: 50%;
+}
+
+.gray {
+  background-color: #ddd;
+}
+
+#output-text {
+  white-space: normal;
+}
+
+#output * {
+  word-break: break-all;
+}
+
+#output div {
+  margin-bottom: 1em;
 }
 
 .cell {
   display: table-cell;
   vertical-align: top;
+  padding: 9px;
 }
 
-#left-bottom {
-  height: 100%;
+#settings-table .cell {
+  padding: 5px;
 }
 
 #symbols > div {
   display: table-cell;
   vertical-align: middle;
   text-align: center;
-  font-family: emoji;
   width: 30px;
   height: 30px;
   border: 1px solid #ccc;
@@ -93,14 +108,16 @@ body {
 
 textarea {
   resize: none;
-  font-family: emoji;
   font-size: 18pt;
   width: 100%;
   height: 100%;
   border: none;
-  padding-left: 4px;
-  padding-top: 10px;
   font-weight: normal;
+}
+
+#symbols-cell,
+#settings-cell {
+  padding: 1px;
 }
 
 textarea:focus {
@@ -114,17 +131,6 @@ textarea:focus {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
-
-@font-face {
-  font-family: emoji;
-
-  /* Fonts for text outside emoji blocks */
-  src:
-    local("Droid Sans Mono"),
-    local("Lucida Console"),
-    local("Arial Monospaced"),
-    local(Arial);
 }
 
 @font-face {
